@@ -1,7 +1,5 @@
 package com.example.booktracker
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import java.net.URL
+import com.squareup.picasso.Picasso
 
 class ReadingListAdapter : ListAdapter<Book, ReadingListAdapter.ReadingListViewHolder>(ReadingListComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReadingListViewHolder {
@@ -19,14 +17,9 @@ class ReadingListAdapter : ListAdapter<Book, ReadingListAdapter.ReadingListViewH
 
     override fun onBindViewHolder(holder: ReadingListViewHolder, position: Int) {
         val current = getItem(position)
+        Picasso.get().load(current.imageUrl).into(holder.coverImageView)
         holder.titleTextView.text = current.title
-//        holder.coverImageView.setImageBitmap(getImageFromUrl(current.imageUrl!!))
     }
-
-//    private fun getImageFromUrl(imageUrl: String): Bitmap {
-//        val url = URL(imageUrl)
-//        return BitmapFactory.decodeStream(url.openConnection().getInputStream())
-//    }
 
     class ReadingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverImageView: ImageView = itemView.findViewById(R.id.coverImageView)
