@@ -12,15 +12,15 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.util.*
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 class AddBookFragment : Fragment() {
-    private val viewModel: AddBookViewModel by viewModels {
-        AddBookViewModelFactory((requireActivity().application as BookApplication).bookRepository)
-    }
+    private val viewModel: AddBookViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,16 @@ class AddBookFragment : Fragment() {
         val addBookButton: Button = view.findViewById(R.id.addBookButton)
 
         addBookButton.setOnClickListener {
-            val book = Book(titleEditText.text.toString(), authorEditText.text.toString(), LocalDate.parse(publishedDateEditText.text.toString()), ReadingList.WANT_TO_READ, "http://books.google.com/books/content?id=owkKhVCq6f0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api")
+            val book = Book(
+                titleEditText.text.toString(),
+                authorEditText.text.toString(),
+                LocalDate.parse(publishedDateEditText.text.toString()),
+                "http://books.google.com/books/content?id=owkKhVCq6f0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+                ReadingList.WANT_TO_READ,
+                null,
+                null,
+                null,
+                null)
             viewModel.insert(book)
             findNavController().navigate(R.id.action_addBookFragment_to_readingListFragment)
             Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_SHORT).show()

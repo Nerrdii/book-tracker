@@ -12,11 +12,11 @@ import android.widget.Spinner
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReadingListFragment : Fragment() {
-    private val viewModel: ReadingListViewModel by viewModels {
-        ReadingListViewModelFactory((requireActivity().application as BookApplication).bookRepository)
-    }
+    private val viewModel: ReadingListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

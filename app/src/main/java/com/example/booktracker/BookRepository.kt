@@ -1,15 +1,15 @@
 package com.example.booktracker
 
-import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class BookRepository(private val bookDao: BookDao) {
+@Singleton
+class BookRepository @Inject constructor(private val bookDao: BookDao) {
     val books: Flow<List<Book>> = bookDao.getAll()
 
     fun booksFromReadingList(list: ReadingList) = bookDao.getByReadingList(list)
 
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     suspend fun insert(book: Book) {
         bookDao.insert(book)
     }

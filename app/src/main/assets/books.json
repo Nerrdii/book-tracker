@@ -1,0 +1,35 @@
+[
+  {
+    "title": "Carrie",
+    "author": "Stephen King",
+    "publishedDate": "2008-06-24",
+    "imageUrl": "https://books.google.com/books/content?id=FNxGvn1SCVMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+    "readingList": 0,
+    "startDate": null,
+    "finishDate": null,
+    "rating": null,
+    "review": null
+  },
+  {
+    "title": "The Hunt for Red October",
+    "author": "Tom Clancy",
+    "publishedDate": "2010-06-24",
+    "imageUrl": "https://books.google.com/books/content?id=yh0XbarB3yMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+    "readingList": 1,
+    "startDate": "2021-04-01",
+    "finishDate": null,
+    "rating": null,
+    "review": null
+  },
+  {
+    "title": "The Whisper Man",
+    "author": "Alex North",
+    "publishedDate": "2019-08-20",
+    "imageUrl": "https://books.google.com/books/content?id=5lxJwwEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
+    "readingList": 2,
+    "startDate": "2020-08-31",
+    "finishDate": "2020-10-02",
+    "rating": 5,
+    "review": "This was a great book!"
+  }
+]

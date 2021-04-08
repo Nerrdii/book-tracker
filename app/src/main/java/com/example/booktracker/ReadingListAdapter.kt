@@ -20,13 +20,13 @@ class ReadingListAdapter : ListAdapter<Book, ReadingListAdapter.ReadingListViewH
     override fun onBindViewHolder(holder: ReadingListViewHolder, position: Int) {
         val current = getItem(position)
         holder.titleTextView.text = current.title
-        holder.coverImageView.setImageBitmap(getImageFromUrl(current.imageUrl!!))
+//        holder.coverImageView.setImageBitmap(getImageFromUrl(current.imageUrl!!))
     }
 
-    fun getImageFromUrl(imageUrl: String): Bitmap {
-        val url = URL(imageUrl)
-        return BitmapFactory.decodeStream(url.openConnection().getInputStream())
-    }
+//    private fun getImageFromUrl(imageUrl: String): Bitmap {
+//        val url = URL(imageUrl)
+//        return BitmapFactory.decodeStream(url.openConnection().getInputStream())
+//    }
 
     class ReadingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverImageView: ImageView = itemView.findViewById(R.id.coverImageView)
