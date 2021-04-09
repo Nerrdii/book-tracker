@@ -22,8 +22,9 @@ class ReadingListAdapter(private val listener: (id: Int) -> Unit) : ListAdapter<
 
     override fun onBindViewHolder(holder: ReadingListViewHolder, position: Int) {
         val current = getItem(position)
-        Picasso.get().load(current.imageUrl).into(holder.coverImageView)
+        Picasso.get().load(current.imageUrl).error(R.mipmap.ic_default_book).into(holder.coverImageView)
         holder.titleTextView.text = current.title
+        holder.authorTextView.text = current.author
 
         holder.itemView.setOnClickListener {
             listener(current.id)
@@ -33,7 +34,7 @@ class ReadingListAdapter(private val listener: (id: Int) -> Unit) : ListAdapter<
     class ReadingListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val coverImageView: ImageView = itemView.findViewById(R.id.coverImageView)
         val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-//        val authorTextView: TextView = itemView.findViewById(R.id.)
+        val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
 
         companion object {
             fun create(parent: ViewGroup): ReadingListViewHolder {

@@ -57,7 +57,7 @@ class ReadingListFragment : Fragment() {
             findNavController().navigate(R.id.action_readingListFragment_to_bookDetailFragment, bundle)
         }
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireActivity())
+        recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         viewModel.books.observe(viewLifecycleOwner) { books ->
             books.let { adapter.submitList(it) }
