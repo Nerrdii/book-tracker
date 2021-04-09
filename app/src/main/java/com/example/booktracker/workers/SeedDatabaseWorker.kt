@@ -1,12 +1,13 @@
-package com.example.booktracker
+package com.example.booktracker.workers
 
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.google.gson.Gson
+import com.example.booktracker.data.AppDatabase
+import com.example.booktracker.data.Book
+import com.example.booktracker.utils.LocalDateDeserializer
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonDeserializer
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import kotlinx.coroutines.coroutineScope

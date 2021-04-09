@@ -9,9 +9,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.booktracker.adapters.ReadingListAdapter
+import com.example.booktracker.data.ReadingList
+import com.example.booktracker.viewmodels.ReadingListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,7 +52,10 @@ class ReadingListFragment : Fragment() {
         }
 
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        val adapter = ReadingListAdapter()
+        val adapter = ReadingListAdapter { id ->
+            val bundle = bundleOf("bookId" to id)
+            findNavController().navigate(R.id.action_readingListFragment_to_bookDetailFragment, bundle)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 

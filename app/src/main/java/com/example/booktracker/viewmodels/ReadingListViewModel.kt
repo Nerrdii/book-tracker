@@ -1,9 +1,10 @@
-package com.example.booktracker
+package com.example.booktracker.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.*
+import com.example.booktracker.data.Book
+import com.example.booktracker.data.BookRepository
+import com.example.booktracker.data.ReadingList
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

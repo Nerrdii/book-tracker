@@ -1,4 +1,4 @@
-package com.example.booktracker
+package com.example.booktracker.data
 
 import android.content.Context
 import androidx.room.Database
@@ -8,9 +8,8 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.time.LocalDate
+import com.example.booktracker.utils.Converters
+import com.example.booktracker.workers.SeedDatabaseWorker
 
 @Database(entities = [Book::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)

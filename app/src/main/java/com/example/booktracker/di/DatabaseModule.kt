@@ -1,6 +1,8 @@
-package com.example.booktracker
+package com.example.booktracker.di
 
 import android.content.Context
+import com.example.booktracker.data.AppDatabase
+import com.example.booktracker.data.BookDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

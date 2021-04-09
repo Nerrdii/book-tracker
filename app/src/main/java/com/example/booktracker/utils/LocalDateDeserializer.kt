@@ -1,4 +1,4 @@
-package com.example.booktracker
+package com.example.booktracker.utils
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer

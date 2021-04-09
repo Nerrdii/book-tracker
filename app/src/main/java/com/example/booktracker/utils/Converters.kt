@@ -1,6 +1,7 @@
-package com.example.booktracker
+package com.example.booktracker.utils
 
 import androidx.room.TypeConverter
+import com.example.booktracker.data.ReadingList
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
