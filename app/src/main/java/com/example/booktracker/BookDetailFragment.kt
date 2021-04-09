@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.booktracker.viewmodels.BookDetailViewModel
@@ -24,8 +25,10 @@ class BookDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bookId = requireArguments().getInt("bookId")
+        val titleTextView: TextView = view.findViewById(R.id.detailTitleTextView)
 
-        viewModel.showBook()
+        viewModel.book.observe(viewLifecycleOwner) { book ->
+            titleTextView.text = book.title
+        }
     }
 }
