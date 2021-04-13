@@ -8,12 +8,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.booktracker.HomeFragment"
-        android:label="fragment_home"
+        android:label="Book Tracker"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.booktracker.SearchFragment"
-        android:label="fragment_search"
+        android:label="Search"
         tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_searchResultsFragment"
@@ -25,8 +25,8 @@
     <fragment
         android:id="@+id/searchResultsFragment"
         android:name="com.example.booktracker.SearchResultsFragment"
-        android:label="fragment_search_results"
-        tools:layout="@layout/fragment_search_results" >
+        android:label="Search Results"
+        tools:layout="@layout/fragment_search_results">
         <argument
             android:name="searchQuery"
             app:argType="string" />
@@ -34,8 +34,8 @@
     <fragment
         android:id="@+id/readingListFragment"
         android:name="com.example.booktracker.ReadingListFragment"
-        android:label="fragment_reading_list"
-        tools:layout="@layout/fragment_reading_list" >
+        android:label="My Books"
+        tools:layout="@layout/fragment_reading_list">
         <action
             android:id="@+id/action_readingListFragment_to_bookDetailFragment"
             app:destination="@id/bookDetailFragment" />
@@ -43,8 +43,8 @@
     <fragment
         android:id="@+id/addBookFragment"
         android:name="com.example.booktracker.AddBookFragment"
-        android:label="fragment_add_book"
-        tools:layout="@layout/fragment_add_book" >
+        android:label="Add Book"
+        tools:layout="@layout/fragment_add_book">
         <action
             android:id="@+id/action_addBookFragment_to_readingListFragment"
             app:destination="@id/readingListFragment" />
@@ -52,8 +52,8 @@
     <fragment
         android:id="@+id/bookDetailFragment"
         android:name="com.example.booktracker.BookDetailFragment"
-        android:label="fragment_book_detail"
-        tools:layout="@layout/fragment_book_detail" >
+        android:label="Book Details"
+        tools:layout="@layout/fragment_book_detail">
         <argument
             android:name="bookId"
             app:argType="integer" />
