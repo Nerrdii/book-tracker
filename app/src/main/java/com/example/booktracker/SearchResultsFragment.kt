@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booktracker.adapters.SearchResultsAdapter
@@ -36,7 +38,10 @@ class SearchResultsFragment : Fragment() {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.searchResultsRecyclerView)
 
-        val adapter = SearchResultsAdapter()
+        val adapter = SearchResultsAdapter { id ->
+            val bundle = bundleOf("bookId" to id)
+            findNavController().navigate(R.id.action_searchResultsFragment_to_searchResultDetailFragment, bundle)
+        }
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter

@@ -32,4 +32,11 @@ class BookRepository @Inject constructor(private val bookDao: BookDao, private v
              emit(response.items)
         }
     }
+
+    fun googleBookById(id: String): Flow<GoogleBook> {
+        return flow {
+            val response = service.getBookById(id)
+            emit(response)
+        }
+    }
 }

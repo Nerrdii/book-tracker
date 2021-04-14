@@ -30,6 +30,9 @@
         <argument
             android:name="searchQuery"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultsFragment_to_searchResultDetailFragment"
+            app:destination="@id/searchResultDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/readingListFragment"
@@ -72,5 +75,14 @@
         <action
             android:id="@+id/action_editBookFragment_to_readingListFragment"
             app:destination="@id/readingListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultDetailFragment"
+        android:name="com.example.booktracker.SearchResultDetailFragment"
+        android:label="fragment_search_result_detail"
+        tools:layout="@layout/fragment_search_result_detail" >
+        <argument
+            android:name="bookId"
+            app:argType="string" />
     </fragment>
 </navigation>
