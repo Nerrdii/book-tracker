@@ -37,7 +37,8 @@ class BookDetailFragment : Fragment() {
         val editButton: Button = view.findViewById(R.id.detailEditButton)
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
-            Picasso.get().load(book.imageUrl).error(R.mipmap.ic_default_book).into(coverImageView)
+            val imageUrl = if (book.imageUrl?.isEmpty() == true) null else book.imageUrl
+            Picasso.get().load(imageUrl).placeholder(R.mipmap.ic_default_book).error(R.mipmap.ic_default_book).into(coverImageView)
             titleTextView.text = book.title
             authorTextView.text = book.author
             publishedDateTextView.text = book.publishedDate.toString()

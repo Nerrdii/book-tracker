@@ -22,7 +22,8 @@ class ReadingListAdapter(private val listener: (id: Int) -> Unit) : ListAdapter<
 
     override fun onBindViewHolder(holder: ReadingListViewHolder, position: Int) {
         val current = getItem(position)
-        Picasso.get().load(current.imageUrl).error(R.mipmap.ic_default_book).into(holder.coverImageView)
+        val imageUrl = if (current.imageUrl?.isEmpty() == true) null else current.imageUrl
+        Picasso.get().load(imageUrl).placeholder(R.mipmap.ic_default_book).error(R.mipmap.ic_default_book).into(holder.coverImageView)
         holder.titleTextView.text = current.title
         holder.authorTextView.text = current.author
 
