@@ -40,7 +40,8 @@ class AddBookFragment : Fragment() {
         val startDateEditText: EditText = view.findViewById(R.id.startDateEditText)
         val finishDateEditText: EditText = view.findViewById(R.id.finishDateEditText)
         val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
-        val addBookButton: Button = view.findViewById(R.id.addBookButton)
+        val reviewEditText: EditText = view.findViewById(R.id.reviewEditText)
+        val addBookButton: Button = view.findViewById(R.id.editBookButton)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -54,16 +55,19 @@ class AddBookFragment : Fragment() {
                         startDateEditText.visibility = View.INVISIBLE
                         finishDateEditText.visibility = View.INVISIBLE
                         ratingBar.visibility = View.INVISIBLE
+                        reviewEditText.visibility = View.INVISIBLE
                     }
                     ReadingList.READING -> {
                         startDateEditText.visibility = View.VISIBLE
                         finishDateEditText.visibility = View.INVISIBLE
                         ratingBar.visibility = View.INVISIBLE
+                        reviewEditText.visibility = View.INVISIBLE
                     }
                     ReadingList.READ -> {
                         startDateEditText.visibility = View.VISIBLE
                         finishDateEditText.visibility = View.VISIBLE
                         ratingBar.visibility = View.VISIBLE
+                        reviewEditText.visibility = View.VISIBLE
                     }
                 }
             }
@@ -84,7 +88,7 @@ class AddBookFragment : Fragment() {
                 startDate,
                 finishDate,
                 ratingBar.rating.toInt(),
-                null)
+                reviewEditText.text.toString())
             viewModel.insert(book)
             findNavController().navigate(R.id.action_addBookFragment_to_readingListFragment)
             Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_SHORT).show()
