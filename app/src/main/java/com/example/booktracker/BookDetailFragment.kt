@@ -1,5 +1,7 @@
 package com.example.booktracker
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +37,7 @@ class BookDetailFragment : Fragment() {
         val authorTextView: TextView = view.findViewById(R.id.detailAuthorTextView)
         val publishedDateTextView: TextView = view.findViewById(R.id.detailPublishedDateTextView)
         val editButton: Button = view.findViewById(R.id.detailEditButton)
+        val deleteButton: Button = view.findViewById(R.id.detailDeleteButton)
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
             val imageUrl = if (book.imageUrl?.isEmpty() == true) null else book.imageUrl
@@ -48,6 +51,22 @@ class BookDetailFragment : Fragment() {
             val bookId = arguments?.getInt("bookId")
             val bundle = bundleOf("bookId" to bookId)
             findNavController().navigate(R.id.action_bookDetailFragment_to_editBookFragment, bundle)
+        }
+
+        deleteButton.setOnClickListener {
+            val alert = AlertDialog.Builder(requireContext())
+            with (alert) {
+                setTitle("Delete")
+                setMessage("Are you sure you want to delete this book?")
+                setPositiveButton("Yes") { _, _ ->
+                    viewModel.delete()
+                    findNavController().navigateUp()
+                }
+                setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                show()
+            }
         }
     }
 }

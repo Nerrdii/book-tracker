@@ -19,6 +19,6 @@ class EditBookViewModel @Inject constructor(
     val book = repository.bookById(bookId).asLiveData()
 
     fun update(book: Book) = viewModelScope.launch {
-        repository.insert(book)
+        repository.update(book)
     }
 }

@@ -22,6 +22,10 @@ class BookRepository @Inject constructor(private val bookDao: BookDao, private v
         bookDao.update(book)
     }
 
+    suspend fun delete(book: Book) {
+        bookDao.delete(book)
+    }
+
     fun search(query: String): Flow<List<GoogleBook>> {
         return flow {
             val response = service.searchBooks(query, 0, 25)
