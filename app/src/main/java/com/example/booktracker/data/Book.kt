@@ -12,7 +12,7 @@ data class Book(
     @ColumnInfo val author: String?,
     @ColumnInfo val publishedDate: LocalDate?,
     @ColumnInfo val imageUrl: String?,
-    @ColumnInfo val readingList: ReadingList?,
+    @ColumnInfo val readingList: ReadingList,
     @ColumnInfo val startDate: LocalDate?,
     @ColumnInfo val finishDate: LocalDate?,
     @ColumnInfo val rating: Int?,

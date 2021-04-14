@@ -64,10 +64,13 @@
     <fragment
         android:id="@+id/editBookFragment"
         android:name="com.example.booktracker.EditBookFragment"
-        android:label="fragment_edit_book"
-        tools:layout="@layout/fragment_edit_book" >
+        android:label="Edit Book"
+        tools:layout="@layout/fragment_edit_book">
         <argument
             android:name="bookId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_editBookFragment_to_readingListFragment"
+            app:destination="@id/readingListFragment" />
     </fragment>
 </navigation>
