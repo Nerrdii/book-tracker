@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -36,6 +37,11 @@ class BookDetailFragment : Fragment() {
         val titleTextView: TextView = view.findViewById(R.id.detailTitleTextView)
         val authorTextView: TextView = view.findViewById(R.id.detailAuthorTextView)
         val publishedDateTextView: TextView = view.findViewById(R.id.detailPublishedDateTextView)
+        val readingListTextView: TextView = view.findViewById(R.id.detailReadingListTextView)
+        val startDateTextView: TextView = view.findViewById(R.id.detailStartDateTextView)
+        val finishDateTextView: TextView = view.findViewById(R.id.detailFinishDateTextView)
+        val ratingBar: RatingBar = view.findViewById(R.id.detailRatingBar)
+        val reviewTextView: TextView = view.findViewById(R.id.detailReviewTextView)
         val editButton: Button = view.findViewById(R.id.detailEditButton)
         val deleteButton: Button = view.findViewById(R.id.detailDeleteButton)
 
@@ -45,6 +51,23 @@ class BookDetailFragment : Fragment() {
             titleTextView.text = book.title
             authorTextView.text = book.author
             publishedDateTextView.text = book.publishedDate.toString()
+            readingListTextView.text = book.readingList.toString()
+            if (book.startDate != null) {
+                startDateTextView.visibility = View.VISIBLE
+                startDateTextView.text = "Started reading ${book.startDate}"
+            }
+            if (book.finishDate != null) {
+                finishDateTextView.visibility = View.VISIBLE
+                finishDateTextView.text = "Finished reading ${book.finishDate}"
+            }
+            if (book.rating != null && book.rating > 0) {
+                ratingBar.visibility = View.VISIBLE
+                ratingBar.rating = book.rating.toFloat()
+            }
+            if (book.review != null) {
+                reviewTextView.visibility = View.VISIBLE
+                reviewTextView.text = book.review
+            }
         }
 
         editButton.setOnClickListener {
