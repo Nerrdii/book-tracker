@@ -79,6 +79,7 @@
         android:layout_marginEnd="10dp"
         android:hint="Start Date"
         android:inputType="date"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/readingListSpinner" />
@@ -92,6 +93,7 @@
         android:layout_marginEnd="10dp"
         android:hint="Finish Date"
         android:inputType="date"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ratingBar"
         app:layout_constraintTop_toBottomOf="@+id/startDateEditText" />
@@ -102,6 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:stepSize="1.0"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/finishDateEditText" />
@@ -115,6 +118,7 @@
         android:layout_marginEnd="10dp"
         android:inputType="textMultiLine"
         android:hint="Review"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar" />

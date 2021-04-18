@@ -51,16 +51,16 @@ class EditBookFragment : Fragment() {
             ) {
                 when (ReadingList.values()[position]) {
                     ReadingList.WANT_TO_READ -> {
-                        startDateEditText.visibility = View.INVISIBLE
-                        finishDateEditText.visibility = View.INVISIBLE
-                        ratingBar.visibility = View.INVISIBLE
-                        reviewEditText.visibility = View.INVISIBLE
+                        startDateEditText.visibility = View.GONE
+                        finishDateEditText.visibility = View.GONE
+                        ratingBar.visibility = View.GONE
+                        reviewEditText.visibility = View.GONE
                     }
                     ReadingList.READING -> {
                         startDateEditText.visibility = View.VISIBLE
-                        finishDateEditText.visibility = View.INVISIBLE
-                        ratingBar.visibility = View.INVISIBLE
-                        reviewEditText.visibility = View.INVISIBLE
+                        finishDateEditText.visibility = View.GONE
+                        ratingBar.visibility = View.GONE
+                        reviewEditText.visibility = View.GONE
                     }
                     ReadingList.READ -> {
                         startDateEditText.visibility = View.VISIBLE
