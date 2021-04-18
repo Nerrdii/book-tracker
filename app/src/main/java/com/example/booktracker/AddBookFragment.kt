@@ -1,5 +1,6 @@
 package com.example.booktracker
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,9 @@ import com.example.booktracker.data.Book
 import com.example.booktracker.data.ReadingList
 import com.example.booktracker.viewmodels.AddBookViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.DateFormat
+import java.text.Format
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
@@ -29,6 +33,8 @@ class AddBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val calendar = Calendar.getInstance()
 
         val spinner: Spinner = view.findViewById(R.id.readingListSpinner)
         spinner.adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ReadingList.values())
@@ -73,6 +79,35 @@ class AddBookFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        val date = DatePickerDialog.OnDateSetListener { datePickerView, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            view.findViewById<EditText>(datePickerView.tag as Int).setText(sdf.format(calendar.time))
+        }
+
+        startDateEditText.setOnClickListener {
+            val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            picker.datePicker.tag = R.id.startDateEditText
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
+        }
+
+        finishDateEditText.setOnClickListener {
+            val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            picker.datePicker.tag = R.id.finishDateEditText
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
+        }
+
+        publishedDateEditText.setOnClickListener {
+            val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            picker.datePicker.tag = R.id.publishedDateEditText
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
         }
 
         addBookButton.setOnClickListener {
