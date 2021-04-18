@@ -1,5 +1,6 @@
 package com.example.booktracker.data
 
+import java.io.Serializable
 import java.time.LocalDate
 
 data class GoogleBook(
@@ -10,4 +11,4 @@ data class GoogleBook(
     val description: String?,
     val genre: String?,
     val imageUrl: String?,
-)
+) : Serializable

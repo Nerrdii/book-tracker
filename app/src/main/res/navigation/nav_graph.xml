@@ -84,5 +84,20 @@
         <argument
             android:name="bookId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_searchResultDetailFragment_to_searchResultAddFragment"
+            app:destination="@id/searchResultAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultAddFragment"
+        android:name="com.example.booktracker.SearchResultAddFragment"
+        android:label="fragment_search_result_add"
+        tools:layout="@layout/fragment_search_result_add" >
+        <argument
+            android:name="book"
+            app:argType="com.example.booktracker.data.GoogleBook" />
+        <action
+            android:id="@+id/action_searchResultAddFragment_to_readingListFragment"
+            app:destination="@id/readingListFragment" />
     </fragment>
 </navigation>
