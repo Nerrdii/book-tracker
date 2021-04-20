@@ -114,39 +114,32 @@ class AddBookFragment : Fragment() {
             val startDate = if (startDateEditText.text.isEmpty()) null else LocalDate.parse(startDateEditText.text.toString())
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
 
-            val book = Book(
-                titleEditText.text.toString(),
-                authorEditText.text.toString(),
-                LocalDate.parse(publishedDateEditText.text.toString()),
-                imageUrlEditText.text.toString(),
-                spinner.selectedItem as ReadingList,
-                startDate,
-                finishDate,
-                ratingBar.rating.toInt(),
-                reviewEditText.text.toString())
-            viewModel.insert(book)
-            findNavController().navigate(R.id.action_addBookFragment_to_readingListFragment)
-            Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_SHORT).show()
+            when {
+                titleEditText.text.isEmpty() -> {
+                    titleEditText.error = "Please enter a title"
+                }
+                authorEditText.text.isEmpty() -> {
+                    authorEditText.error = "Please enter an author"
+                }
+                publishedDateEditText.text.isEmpty() -> {
+                    publishedDateEditText.error = "Please enter a published date"
+                }
+                else -> {
+                    val book = Book(
+                        titleEditText.text.toString(),
+                        authorEditText.text.toString(),
+                        LocalDate.parse(publishedDateEditText.text.toString()),
+                        imageUrlEditText.text.toString(),
+                        spinner.selectedItem as ReadingList,
+                        startDate,
+                        finishDate,
+                        ratingBar.rating.toInt(),
+                        reviewEditText.text.toString())
+                    viewModel.insert(book)
+                    findNavController().navigate(R.id.action_addBookFragment_to_readingListFragment)
+                    Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_LONG).show()
+                }
+            }
         }
-
-//        val publishedDateEditText: EditText = view.findViewById(R.id.publishedDateEditText)
-//        val publishedDateCalendar: Calendar = Calendar.getInstance()
-//
-//        val date = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-//            with (publishedDateCalendar) {
-//                set(Calendar.YEAR, year)
-//                set(Calendar.MONTH, month)
-//                set(Calendar.DAY_OF_MONTH, dayOfMonth)
-//                updateLabel(view)
-//            }
-//        }
-//
-//        publishedDateEditText.setOnClickListener {
-//            DatePickerDialog(requireActivity()).setOnDateSetListener(date)
-//        }
     }
-
-//    private fun updateLabel(view: View) {
-//        view.text
-//    }
 }
