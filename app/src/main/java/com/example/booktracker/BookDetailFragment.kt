@@ -14,6 +14,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.booktracker.utils.DateUtils
 import com.example.booktracker.viewmodels.BookDetailViewModel
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,15 +51,15 @@ class BookDetailFragment : Fragment() {
             Picasso.get().load(imageUrl).placeholder(R.mipmap.ic_default_book).error(R.mipmap.ic_default_book).into(coverImageView)
             titleTextView.text = book.title
             authorTextView.text = book.author
-            publishedDateTextView.text = book.publishedDate.toString()
+            publishedDateTextView.text = DateUtils.dateToString(book.publishedDate)
             readingListTextView.text = book.readingList.toString()
             if (book.startDate != null) {
                 startDateTextView.visibility = View.VISIBLE
-                startDateTextView.text = "Started reading ${book.startDate}"
+                startDateTextView.text = "Started reading ${DateUtils.dateToString(book.startDate)}"
             }
             if (book.finishDate != null) {
                 finishDateTextView.visibility = View.VISIBLE
-                finishDateTextView.text = "Finished reading ${book.finishDate}"
+                finishDateTextView.text = "Finished reading ${DateUtils.dateToString(book.finishDate)}"
             }
             if (book.rating != null && book.rating > 0) {
                 ratingBar.visibility = View.VISIBLE
