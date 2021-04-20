@@ -44,7 +44,6 @@ class ReadingListFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                Log.d("DVS", ReadingList.values()[position].toString())
                 viewModel.updateReadingList(ReadingList.values()[position])
             }
 
