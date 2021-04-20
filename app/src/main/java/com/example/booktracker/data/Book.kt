@@ -8,9 +8,9 @@ import java.time.LocalDate
 
 @Entity(tableName = "books")
 data class Book(
-    @ColumnInfo val title: String?,
-    @ColumnInfo val author: String?,
-    @ColumnInfo val publishedDate: LocalDate?,
+    @ColumnInfo val title: String,
+    @ColumnInfo val author: String,
+    @ColumnInfo val publishedDate: LocalDate,
     @ColumnInfo val imageUrl: String?,
     @ColumnInfo val readingList: ReadingList,
     @ColumnInfo val startDate: LocalDate?,

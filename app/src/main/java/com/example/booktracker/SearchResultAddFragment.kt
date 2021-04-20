@@ -76,10 +76,11 @@ class SearchResultAddFragment : Fragment() {
         saveButton.setOnClickListener {
             val startDate = if (startDateEditText.text.isEmpty()) null else LocalDate.parse(startDateEditText.text.toString())
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
+            val author = googleBook.author ?: ""
 
             val book = Book(
                 googleBook.title,
-                googleBook.author,
+                author,
                 LocalDate.parse(googleBook.publishedDate.toString()),
                 googleBook.imageUrl,
                 spinner.selectedItem as ReadingList,

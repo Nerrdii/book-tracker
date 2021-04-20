@@ -11,7 +11,7 @@ import androidx.work.WorkManager
 import com.example.booktracker.utils.Converters
 import com.example.booktracker.workers.SeedDatabaseWorker
 
-@Database(entities = [Book::class], version = 2, exportSchema = false)
+@Database(entities = [Book::class], version = 3, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun bookDao(): BookDao
