@@ -1,5 +1,6 @@
 package com.example.booktracker
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,9 @@ import com.example.booktracker.data.GoogleBook
 import com.example.booktracker.data.ReadingList
 import com.example.booktracker.viewmodels.SearchResultAddViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.*
 
 @AndroidEntryPoint
 class SearchResultAddFragment : Fragment() {
@@ -29,6 +32,8 @@ class SearchResultAddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val calendar = Calendar.getInstance()
 
         val googleBook = requireArguments().getSerializable("book")!! as GoogleBook
 
@@ -73,6 +78,28 @@ class SearchResultAddFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        val date = DatePickerDialog.OnDateSetListener { datePickerView, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+            view.findViewById<EditText>(datePickerView.tag as Int).setText(sdf.format(calendar.time))
+        }
+
+        startDateEditText.setOnClickListener {
+            val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            picker.datePicker.tag = R.id.searchResultAddStartDateEditText
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
+        }
+
+        finishDateEditText.setOnClickListener {
+            val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            picker.datePicker.tag = R.id.searchResultAddFinishDateEditText
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
+        }
+
         saveButton.setOnClickListener {
             val startDate = if (startDateEditText.text.isEmpty()) null else LocalDate.parse(startDateEditText.text.toString())
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
@@ -90,7 +117,7 @@ class SearchResultAddFragment : Fragment() {
                 reviewEditText.text.toString())
             viewModel.insert(book)
             findNavController().navigate(R.id.action_searchResultAddFragment_to_readingListFragment)
-            Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_LONG).show()
         }
     }
 
