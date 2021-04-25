@@ -1,6 +1,7 @@
 package com.example.booktracker.di
 
 import android.content.Context
+import com.example.booktracker.data.ActivityDao
 import com.example.booktracker.data.AppDatabase
 import com.example.booktracker.data.BookDao
 import dagger.Module
@@ -23,6 +24,11 @@ class DatabaseModule {
     @Provides
     fun provideBookDao(appDatabase: AppDatabase): BookDao {
         return appDatabase.bookDao()
+    }
+
+    @Provides
+    fun provideActivityDao(appDatabase: AppDatabase): ActivityDao {
+        return appDatabase.activityDao()
     }
 
 }

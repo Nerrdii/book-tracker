@@ -1,0 +1,22 @@
+[
+  {
+    "type": 0,
+    "description": "You added Carrie to your Want to Read list",
+    "createdAt": "2021-04-20T15:15:29"
+  },
+  {
+    "type": 0,
+    "description": "You added The Hunt for Red October to your Want to Read list",
+    "createdAt": "2021-04-21T15:15:29"
+  },
+  {
+    "type": 1,
+    "description": "You moved The Hunt for Red October to your Reading list",
+    "createdAt": "2021-04-21T19:14:29"
+  },
+  {
+    "type": 0,
+    "description": "You added The Whisper Man to your Read list",
+    "createdAt": "2021-04-22T15:15:29"
+  }
+]
