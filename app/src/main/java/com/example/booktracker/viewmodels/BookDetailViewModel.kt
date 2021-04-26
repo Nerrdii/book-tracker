@@ -4,22 +4,31 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.booktracker.data.Book
-import com.example.booktracker.data.BookRepository
+import com.example.booktracker.data.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @HiltViewModel
 class BookDetailViewModel @Inject constructor(
-    private val repository: BookRepository,
+    private val bookRepository: BookRepository,
+    private val activityRepository: ActivityRepository,
     savedStateHandle: SavedStateHandle
-    )  : ViewModel() {
+) : ViewModel() {
 
     private val bookId = savedStateHandle.get<Int>("bookId")!!
-    val book = repository.bookById(bookId).asLiveData()
+    val book = bookRepository.bookById(bookId).asLiveData()
 
     fun delete() = viewModelScope.launch {
-        repository.delete(book.value!!)
+        val title = this@BookDetailViewModel.book.value?.title
+        withContext(Dispatchers.IO) {
+            bookRepository.delete(book.value!!)
+            activityRepository.insert(
+                Activity(
+                    ActivityType.DELETE,
+                    "You removed $title from your library"
+                )
+            )
+        }
     }
 }
