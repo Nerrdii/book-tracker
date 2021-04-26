@@ -45,7 +45,7 @@ class EditBookFragment : Fragment() {
         val finishDateEditText: EditText = view.findViewById(R.id.finishDateEditText)
         val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
         val reviewEditText: EditText = view.findViewById(R.id.reviewEditText)
-        val editBookButton: Button = view.findViewById(R.id.editBookButton)
+        val editBookButton: Button = view.findViewById(R.id.saveBookButton)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(

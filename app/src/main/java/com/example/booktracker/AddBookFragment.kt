@@ -13,8 +13,6 @@ import com.example.booktracker.data.Book
 import com.example.booktracker.data.ReadingList
 import com.example.booktracker.viewmodels.AddBookViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.DateFormat
-import java.text.Format
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
@@ -47,7 +45,7 @@ class AddBookFragment : Fragment() {
         val finishDateEditText: EditText = view.findViewById(R.id.finishDateEditText)
         val ratingBar: RatingBar = view.findViewById(R.id.ratingBar)
         val reviewEditText: EditText = view.findViewById(R.id.reviewEditText)
-        val addBookButton: Button = view.findViewById(R.id.editBookButton)
+        val addBookButton: Button = view.findViewById(R.id.addBookButton)
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
