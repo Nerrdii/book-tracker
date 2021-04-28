@@ -69,7 +69,7 @@ class BookDetailFragment : Fragment() {
                 ratingBar.visibility = View.VISIBLE
                 ratingBar.rating = book.rating.toFloat()
             }
-            if (book.review != null) {
+            if (book.review != null && book.review.isNotEmpty()) {
                 reviewTextView.visibility = View.VISIBLE
                 reviewTextView.text = book.review
                 shareReviewButton.visibility = View.VISIBLE

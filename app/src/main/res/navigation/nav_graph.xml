@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/searchResultDetailFragment"
         android:name="com.example.booktracker.SearchResultDetailFragment"
-        android:label="fragment_search_result_detail"
+        android:label="Search Result Details"
         tools:layout="@layout/fragment_search_result_detail" >
         <argument
             android:name="bookId"
@@ -94,7 +94,7 @@
     <fragment
         android:id="@+id/searchResultAddFragment"
         android:name="com.example.booktracker.SearchResultAddFragment"
-        android:label="fragment_search_result_add"
+        android:label="Add Book"
         tools:layout="@layout/fragment_search_result_add" >
         <argument
             android:name="book"
