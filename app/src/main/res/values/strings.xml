@@ -16,4 +16,5 @@
     <string name="search_button_text">Search</string>
     <string name="or_text">Or</string>
     <string name="add_manually_button_text">Add Manually</string>
+    <string name="share_review_button_text">Share Review</string>
 </resources>

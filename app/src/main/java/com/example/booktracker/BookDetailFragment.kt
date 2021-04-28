@@ -1,7 +1,7 @@
 package com.example.booktracker
 
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +46,7 @@ class BookDetailFragment : Fragment() {
         val reviewTextView: TextView = view.findViewById(R.id.detailReviewTextView)
         val editButton: Button = view.findViewById(R.id.detailEditButton)
         val deleteButton: Button = view.findViewById(R.id.detailDeleteButton)
+        val shareReviewButton: Button = view.findViewById(R.id.shareReviewButton)
 
         // Using book from view model, populate layout with data
         viewModel.book.observe(viewLifecycleOwner) { book ->
@@ -71,6 +72,15 @@ class BookDetailFragment : Fragment() {
             if (book.review != null) {
                 reviewTextView.visibility = View.VISIBLE
                 reviewTextView.text = book.review
+                shareReviewButton.visibility = View.VISIBLE
+            }
+
+            shareReviewButton.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.putExtra(Intent.EXTRA_TEXT, "I rated ${book.title} ${book.rating} stars. Review: ${book.review}")
+                intent.type = "text/plain"
+
+                startActivity(intent)
             }
         }
 

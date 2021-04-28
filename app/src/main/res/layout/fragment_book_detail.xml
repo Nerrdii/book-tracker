@@ -20,8 +20,8 @@
             android:id="@+id/detailCoverImageView"
             android:layout_width="125dp"
             android:layout_height="125dp"
-            tools:src="@tools:sample/avatars"
-            android:contentDescription="@string/image_content_description_text" />
+            android:contentDescription="@string/image_content_description_text"
+            tools:src="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -118,4 +118,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detailEditButton" />
+
+    <Button
+        android:id="@+id/shareReviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/share_review_button_text"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailDeleteButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
