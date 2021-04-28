@@ -12,10 +12,14 @@ import com.example.booktracker.R
 import com.example.booktracker.data.GoogleBook
 import com.squareup.picasso.Picasso
 
-class SearchResultsAdapter(private val listener: (id: String) -> Unit) : ListAdapter<GoogleBook, SearchResultsAdapter.SearchResultsViewHolder>(SearchResultsDiffCallback()) {
+class SearchResultsAdapter(private val listener: (id: String) -> Unit) :
+    ListAdapter<GoogleBook, SearchResultsAdapter.SearchResultsViewHolder>(SearchResultsDiffCallback()) {
+    // Bind activity data to view holder
     override fun onBindViewHolder(holder: SearchResultsViewHolder, position: Int) {
         val current = getItem(position)
-        Picasso.get().load(current.imageUrl).error(R.mipmap.ic_default_book).into(holder.coverImageView)
+        // Load image into image view
+        Picasso.get().load(current.imageUrl).error(R.mipmap.ic_default_book)
+            .into(holder.coverImageView)
         holder.titleTextView.text = current.title
         holder.authorTextView.text = current.author
 
@@ -28,11 +32,13 @@ class SearchResultsAdapter(private val listener: (id: String) -> Unit) : ListAda
         return SearchResultsViewHolder.create(parent)
     }
 
-    class SearchResultsViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    class SearchResultsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // View references
         val coverImageView: ImageView = itemView.findViewById(R.id.searchResultsCoverImageView)
         val titleTextView: TextView = itemView.findViewById(R.id.searchResultsTitleTextView)
         val authorTextView: TextView = itemView.findViewById(R.id.searchResultsAuthorTextView)
 
+        // Static method to create view holder for recycler view
         companion object {
             fun create(parent: ViewGroup): SearchResultsViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
@@ -42,6 +48,7 @@ class SearchResultsAdapter(private val listener: (id: String) -> Unit) : ListAda
         }
     }
 
+    // Used to efficiently update recycler view items
     class SearchResultsDiffCallback : DiffUtil.ItemCallback<GoogleBook>() {
         override fun areContentsTheSame(oldItem: GoogleBook, newItem: GoogleBook): Boolean {
             return oldItem.id == newItem.id

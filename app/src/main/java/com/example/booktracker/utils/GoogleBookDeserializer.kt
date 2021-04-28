@@ -9,6 +9,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatterBuilder
 import java.time.temporal.ChronoField
 
+// This class deserializes JSON from Google Books API to turn into GoogleBook data class
+// to use in application
+
 class GoogleBookDeserializer : JsonDeserializer<GoogleBook> {
     override fun deserialize(
         json: JsonElement?,
@@ -28,6 +31,7 @@ class GoogleBookDeserializer : JsonDeserializer<GoogleBook> {
         return GoogleBook(id, title, author, tryParse(publishedDate), description, genre, imageUrl)
     }
 
+    // Utility method to deal with all possible date types, e.g. 2021, 2021-04, 2021-04-15
     private fun tryParse(dateString: String): LocalDate? {
         val format = DateTimeFormatterBuilder()
         when (dateString.length) {

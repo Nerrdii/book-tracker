@@ -34,6 +34,7 @@ class BookDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // View references
         val coverImageView: ImageView = view.findViewById(R.id.detailCoverImageView)
         val titleTextView: TextView = view.findViewById(R.id.detailTitleTextView)
         val authorTextView: TextView = view.findViewById(R.id.detailAuthorTextView)
@@ -46,6 +47,7 @@ class BookDetailFragment : Fragment() {
         val editButton: Button = view.findViewById(R.id.detailEditButton)
         val deleteButton: Button = view.findViewById(R.id.detailDeleteButton)
 
+        // Using book from view model, populate layout with data
         viewModel.book.observe(viewLifecycleOwner) { book ->
             val imageUrl = if (book.imageUrl?.isEmpty() == true) null else book.imageUrl
             Picasso.get().load(imageUrl).placeholder(R.mipmap.ic_default_book).error(R.mipmap.ic_default_book).into(coverImageView)
@@ -53,6 +55,7 @@ class BookDetailFragment : Fragment() {
             authorTextView.text = book.author
             publishedDateTextView.text = DateUtils.dateToString(book.publishedDate)
             readingListTextView.text = book.readingList.toString()
+            // Show certain views only if relevant
             if (book.startDate != null) {
                 startDateTextView.visibility = View.VISIBLE
                 startDateTextView.text = "Started reading ${DateUtils.dateToString(book.startDate)}"
@@ -72,13 +75,16 @@ class BookDetailFragment : Fragment() {
         }
 
         editButton.setOnClickListener {
+            // Get book ID from arguments
             val bookId = arguments?.getInt("bookId")
             val bundle = bundleOf("bookId" to bookId)
+            // Navigate to edit book fragment with ID
             findNavController().navigate(R.id.action_bookDetailFragment_to_editBookFragment, bundle)
         }
 
         deleteButton.setOnClickListener {
             val alert = AlertDialog.Builder(requireContext())
+            // Show alert for delete book confirmation
             with (alert) {
                 setTitle("Delete")
                 setMessage("Are you sure you want to delete this book?")

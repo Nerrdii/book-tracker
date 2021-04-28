@@ -11,6 +11,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GoogleBooksService {
+    // Get API data based on query
     @GET("volumes")
     suspend fun searchBooks(
         @Query("q") query: String,
@@ -18,12 +19,14 @@ interface GoogleBooksService {
         @Query("maxResults") maxResults: Int
     ): GoogleBooksSearchResponse
 
+    // Get single book based on ID
     @GET("volumes/{id}")
     suspend fun getBookById(@Path("id") id: String): GoogleBook
 
     companion object {
         private const val BASE_URL = "https://www.googleapis.com/books/v1/"
 
+        // Create service using Retrofit
         fun create(): GoogleBooksService {
             val gson = GsonBuilder()
                 .registerTypeAdapter(GoogleBook::class.java, GoogleBookDeserializer())

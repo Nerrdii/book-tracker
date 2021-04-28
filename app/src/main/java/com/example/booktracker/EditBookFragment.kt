@@ -34,9 +34,11 @@ class EditBookFragment : Fragment() {
 
         val calendar = Calendar.getInstance()
 
+        // Populate spinner with reading list options
         val spinner: Spinner = view.findViewById(R.id.readingListSpinner)
         spinner.adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ReadingList.values())
 
+        // View references
         val titleEditText: EditText = view.findViewById(R.id.titleEditText)
         val authorEditText: EditText = view.findViewById(R.id.authorEditText)
         val publishedDateEditText: EditText = view.findViewById(R.id.publishedDateEditText)
@@ -79,6 +81,7 @@ class EditBookFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Date picker dialog listener to set input on correct edit text
         val date = DatePickerDialog.OnDateSetListener { datePickerView, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
@@ -87,6 +90,7 @@ class EditBookFragment : Fragment() {
             view.findViewById<EditText>(datePickerView.tag as Int).setText(sdf.format(calendar.time))
         }
 
+        // Show date picker when clicking on edit text
         startDateEditText.setOnClickListener {
             val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(
                 Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
@@ -115,6 +119,7 @@ class EditBookFragment : Fragment() {
             val startDate = if (startDateEditText.text.isEmpty()) null else LocalDate.parse(startDateEditText.text.toString())
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
 
+            // Validation
             when {
                 titleEditText.text.isEmpty() -> {
                     titleEditText.error = "Please enter a title"
@@ -126,6 +131,7 @@ class EditBookFragment : Fragment() {
                     publishedDateEditText.error = "Please enter a published date"
                 }
                 else -> {
+                    // Update book using view model
                     val book = Book(
                         titleEditText.text.toString(),
                         authorEditText.text.toString(),
@@ -144,6 +150,7 @@ class EditBookFragment : Fragment() {
             }
         }
 
+        // Populate layout with data from view model
         viewModel.book.observe(viewLifecycleOwner) { book ->
             val rating = if (book.rating == null) 0F else book.rating.toFloat()
             val startDate = if (book.startDate == null) "" else book.startDate.toString()

@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchResultsViewModel @Inject constructor(private val repository: BookRepository) : ViewModel() {
+    // Return API results
     fun searchBooks(query: String): Flow<List<GoogleBook>> {
         return repository.search(query)
     }

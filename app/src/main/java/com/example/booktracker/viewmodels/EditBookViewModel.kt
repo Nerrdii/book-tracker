@@ -15,11 +15,14 @@ class EditBookViewModel @Inject constructor(
     private val activityRepository: ActivityRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    // Get book ID from navigation argument
     private val bookId = savedStateHandle.get<Int>("bookId")!!
     val book = bookRepository.bookById(bookId).asLiveData()
 
+    // Update book in database using coroutine to run on separate thread
     fun update(book: Book) = viewModelScope.launch {
         bookRepository.update(book)
+        // Only add activity if reading list changes
         if (this@EditBookViewModel.book.value?.readingList != book.readingList) {
             activityRepository.insert(
                 Activity(

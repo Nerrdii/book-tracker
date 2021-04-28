@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
+// Annotation allows activities/fragments to use dependency injection for getting associated view models
 @AndroidEntryPoint
 class AddBookFragment : Fragment() {
     private val viewModel: AddBookViewModel by viewModels()
@@ -34,9 +35,11 @@ class AddBookFragment : Fragment() {
 
         val calendar = Calendar.getInstance()
 
+        // Populate spinner with reading list options
         val spinner: Spinner = view.findViewById(R.id.readingListSpinner)
         spinner.adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ReadingList.values())
 
+        // View references
         val titleEditText: EditText = view.findViewById(R.id.titleEditText)
         val authorEditText: EditText = view.findViewById(R.id.authorEditText)
         val publishedDateEditText: EditText = view.findViewById(R.id.publishedDateEditText)
@@ -47,6 +50,7 @@ class AddBookFragment : Fragment() {
         val reviewEditText: EditText = view.findViewById(R.id.reviewEditText)
         val addBookButton: Button = view.findViewById(R.id.addBookButton)
 
+        // Listener for reading list spinner to update which views are visible based on selection
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -79,6 +83,7 @@ class AddBookFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Listener for date picker dialog to set input on correct text view
         val date = DatePickerDialog.OnDateSetListener { datePickerView, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
@@ -87,6 +92,7 @@ class AddBookFragment : Fragment() {
             view.findViewById<EditText>(datePickerView.tag as Int).setText(sdf.format(calendar.time))
         }
 
+        // Show date picker when clicking on edit text
         startDateEditText.setOnClickListener {
             val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
             picker.datePicker.tag = R.id.startDateEditText
@@ -112,6 +118,7 @@ class AddBookFragment : Fragment() {
             val startDate = if (startDateEditText.text.isEmpty()) null else LocalDate.parse(startDateEditText.text.toString())
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
 
+            // Validation
             when {
                 titleEditText.text.isEmpty() -> {
                     titleEditText.error = "Please enter a title"
@@ -123,6 +130,7 @@ class AddBookFragment : Fragment() {
                     publishedDateEditText.error = "Please enter a published date"
                 }
                 else -> {
+                    // Add book using view model
                     val book = Book(
                         titleEditText.text.toString(),
                         authorEditText.text.toString(),
@@ -134,6 +142,7 @@ class AddBookFragment : Fragment() {
                         ratingBar.rating.toInt(),
                         reviewEditText.text.toString())
                     viewModel.insert(book)
+                    // Using navigation component, go to reading list fragment
                     findNavController().navigate(R.id.action_addBookFragment_to_readingListFragment)
                     Toast.makeText(requireActivity(), "Book added", Toast.LENGTH_LONG).show()
                 }

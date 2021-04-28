@@ -30,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
             return Room.databaseBuilder(context, AppDatabase::class.java, "book-tracker")
                 .addCallback(
                     object : RoomDatabase.Callback() {
+                        // Override on create method to populate database with initial data
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
                             val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>().build()

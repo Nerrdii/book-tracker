@@ -35,11 +35,14 @@ class SearchResultAddFragment : Fragment() {
 
         val calendar = Calendar.getInstance()
 
+        // Get book from arguments
         val googleBook = requireArguments().getSerializable("book")!! as GoogleBook
 
+        // Populate spinner
         val spinner: Spinner = view.findViewById(R.id.searchResultAddReadingListSpinner)
         spinner.adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ReadingList.values())
 
+        // View references
         val startDateEditText: EditText = view.findViewById(R.id.searchResultAddStartDateEditText)
         val finishDateEditText: EditText = view.findViewById(R.id.searchResultAddFinishDateEditText)
         val ratingBar: RatingBar = view.findViewById(R.id.searchResultAddRatingBar)
@@ -78,6 +81,7 @@ class SearchResultAddFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Date picker dialog for date edit texts
         val date = DatePickerDialog.OnDateSetListener { datePickerView, year, month, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
@@ -86,6 +90,7 @@ class SearchResultAddFragment : Fragment() {
             view.findViewById<EditText>(datePickerView.tag as Int).setText(sdf.format(calendar.time))
         }
 
+        // Listeners for date edit texts
         startDateEditText.setOnClickListener {
             val picker = DatePickerDialog(requireContext(), date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
             picker.datePicker.tag = R.id.searchResultAddStartDateEditText
@@ -105,6 +110,7 @@ class SearchResultAddFragment : Fragment() {
             val finishDate = if (finishDateEditText.text.isEmpty()) null else LocalDate.parse(finishDateEditText.text.toString())
             val author = googleBook.author ?: ""
 
+            // Add new book to database using view model
             val book = Book(
                 googleBook.title,
                 author,

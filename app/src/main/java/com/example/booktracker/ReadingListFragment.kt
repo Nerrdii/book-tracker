@@ -34,6 +34,7 @@ class ReadingListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Populate spinner
         val spinner: Spinner = view.findViewById(R.id.spinner)
         spinner.adapter = ArrayAdapter(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ReadingList.values())
 
@@ -50,14 +51,17 @@ class ReadingListFragment : Fragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
+        // Set up recycler view
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         val adapter = ReadingListAdapter { id ->
+            // Add listener for item click to navigate to detail fragment with correct book ID
             val bundle = bundleOf("bookId" to id)
             findNavController().navigate(R.id.action_readingListFragment_to_bookDetailFragment, bundle)
         }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
+        // Show books from view model in recycler view
         viewModel.books.observe(viewLifecycleOwner) { books ->
             books.let { adapter.submitList(it) }
         }

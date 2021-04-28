@@ -7,6 +7,8 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+// Converters for Room in order to know how to deal with non-primitive data types
+
 class Converters {
 
     @TypeConverter

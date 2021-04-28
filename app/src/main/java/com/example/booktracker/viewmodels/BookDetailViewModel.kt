@@ -16,9 +16,11 @@ class BookDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
+    // Get book ID from navigation argument
     private val bookId = savedStateHandle.get<Int>("bookId")!!
     val book = bookRepository.bookById(bookId).asLiveData()
 
+    // Remove book from database using coroutine to run on separate thread
     fun delete() = viewModelScope.launch {
         val title = this@BookDetailViewModel.book.value?.title
         withContext(Dispatchers.IO) {

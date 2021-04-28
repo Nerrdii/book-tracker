@@ -12,6 +12,7 @@ class SearchResultAddViewModel @Inject constructor(
     private val bookRepository: BookRepository,
     private val activityRepository: ActivityRepository
 ) : ViewModel() {
+    // Add book to database using separate thread
     fun insert(book: Book) = viewModelScope.launch {
         bookRepository.insert(book)
         activityRepository.insert(

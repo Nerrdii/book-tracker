@@ -8,10 +8,12 @@ import java.time.format.FormatStyle
 class DateUtils {
 
     companion object {
+        // Provide string friendly date
         fun dateToString(date: LocalDate): String {
             return date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))
         }
 
+        // Provide string friendly datetime
         fun dateTimeToString(date: LocalDateTime): String {
             return date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM))
         }

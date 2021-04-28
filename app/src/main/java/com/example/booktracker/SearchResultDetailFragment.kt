@@ -32,6 +32,7 @@ class SearchResultDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // View references
         val coverImageView: ImageView = view.findViewById(R.id.searchResultCoverImageView)
         val titleTextView: TextView = view.findViewById(R.id.searchResultTitleTextView)
         val authorTextView: TextView = view.findViewById(R.id.searchResultAuthorTextView)
@@ -40,6 +41,7 @@ class SearchResultDetailFragment : Fragment() {
         val genreTextView: TextView = view.findViewById(R.id.searchResultGenreTextView)
         val addButton: Button = view.findViewById(R.id.searchResultAddButton)
 
+        // Show book data from view model
         viewModel.book.observe(viewLifecycleOwner) { book ->
             val imageUrl = if (book.imageUrl?.isEmpty() == true) null else book.imageUrl
             Picasso.get().load(imageUrl).placeholder(R.mipmap.ic_default_book).error(R.mipmap.ic_default_book).into(coverImageView)
@@ -56,6 +58,7 @@ class SearchResultDetailFragment : Fragment() {
             }
         }
 
+        // Listener for adding book to database
         addButton.setOnClickListener {
             val bundle = bundleOf("book" to viewModel.book.value)
             findNavController().navigate(R.id.action_searchResultDetailFragment_to_searchResultAddFragment, bundle)

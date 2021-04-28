@@ -22,8 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Set up navigation host to be able to use navigation component for switching between fragments
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+        // Add app bar config for bottom navigation
         appBarConfiguration = AppBarConfiguration(setOf(R.id.homeFragment, R.id.searchFragment, R.id.readingListFragment))
         findViewById<BottomNavigationView>(R.id.bottomNavigation).setupWithNavController(navController)
         setupActionBarWithNavController(navController, appBarConfiguration)

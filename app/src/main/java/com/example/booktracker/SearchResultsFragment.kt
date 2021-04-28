@@ -33,12 +33,14 @@ class SearchResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Get search query from arguments
         val searchQuery = requireArguments().getString("searchQuery")!!
-        Log.d("DVS", searchQuery)
 
+        // Set up recycler view
         val recyclerView: RecyclerView = view.findViewById(R.id.searchResultsRecyclerView)
 
         val adapter = SearchResultsAdapter { id ->
+            // Listener for recycler view item to know which book was selected
             val bundle = bundleOf("bookId" to id)
             findNavController().navigate(R.id.action_searchResultsFragment_to_searchResultDetailFragment, bundle)
         }
@@ -46,6 +48,7 @@ class SearchResultsFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
 
+        // Search books using service and show in recycler view
         lifecycleScope.launch {
             viewModel.searchBooks(searchQuery).collectLatest {
                 adapter.submitList(it)

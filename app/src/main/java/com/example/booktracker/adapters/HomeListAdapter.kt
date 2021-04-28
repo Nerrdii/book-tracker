@@ -20,6 +20,7 @@ class HomeListAdapter : ListAdapter<Activity, HomeListAdapter.HomeListViewHolder
         return HomeListViewHolder.create(parent)
     }
 
+    // Bind activity data to view holder
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         val current = getItem(position)
         holder.activityTypeImageView.setImageResource(getIcon(current.type))
@@ -27,6 +28,7 @@ class HomeListAdapter : ListAdapter<Activity, HomeListAdapter.HomeListViewHolder
         holder.createdAtTextView.text = DateUtils.dateTimeToString(current.createdAt)
     }
 
+    // Utility method to get correct icon based on activity type
     private fun getIcon(type: ActivityType): Int {
         return when (type) {
             ActivityType.INSERT -> R.drawable.ic_baseline_bookmark_add_24
@@ -36,10 +38,12 @@ class HomeListAdapter : ListAdapter<Activity, HomeListAdapter.HomeListViewHolder
     }
 
     class HomeListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        // View references
         val activityTypeImageView: ImageView = itemView.findViewById(R.id.activityTypeImageView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val createdAtTextView: TextView = itemView.findViewById(R.id.createdAtTextView)
 
+        // Static method to create view holder for recycler view
         companion object {
             fun create(parent: ViewGroup): HomeListViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
@@ -49,6 +53,7 @@ class HomeListAdapter : ListAdapter<Activity, HomeListAdapter.HomeListViewHolder
         }
     }
 
+    // Used to efficiently update recycler view items
     class HomeListComparator : DiffUtil.ItemCallback<Activity>() {
         override fun areItemsTheSame(oldItem: Activity, newItem: Activity): Boolean {
             return oldItem === newItem

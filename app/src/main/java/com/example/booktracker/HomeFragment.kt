@@ -31,11 +31,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up activity recycler view
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         val adapter = HomeListAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
+        // Show activities in recycler view from view model
         viewModel.activities.observe(viewLifecycleOwner) { activities ->
             activities.let { adapter.submitList(it) }
         }
